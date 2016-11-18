@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/nevakee716/ReverseList"
   },
   "author": "",
   "license": "MIT",
@@ -16,6 +16,6 @@
     "url": ""
   },
   "homepage": "",
-  "wiki": "",
+  "wiki": "https://github.com/nevakee716/ReverseList/wiki",
   "evolve-version": "4.0"
 }
