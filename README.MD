@@ -8,7 +8,7 @@
 
 
 It will allow you to display that way :
- ![](./screen/image1.jpg)
+ ![](/screen/image1.jpg)
 
 
  |
@@ -18,10 +18,10 @@ It will allow you to display that way :
 |
 1.
 
- ![](./screen/image2.jpg)
+ ![](/screen/image2.jpg)
 
 
  |
- ![](./screen/image3.jpg)
+ ![](/screen/image3.jpg)
 
 Set up the layout you want to use to display the list of Activities in the **Use Layout**. You need to set the name of the JavaScript class.Ex: to display activities in a list, set **cwLayoutList**  Set up the node Id of the last node in the **Last Node** optionEx: here the **Last Node** value is the node ID of the Macro Process node. It will indicate that the reverse option should stop here. You can modify the layout used at the Macro Process level. For example you can try to set the Layout List Box. You can also use behaviours on all nodes of the tree.  |
