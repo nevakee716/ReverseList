@@ -1,7 +1,7 @@
 {
   "name": "ReverseList",
   "description": "Allow you to reverse a hierarchical tree in order to re-order data",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "cwLayoutReverseList.js",
   "scripts": {
     "test": ""
