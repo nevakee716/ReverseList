@@ -48,7 +48,8 @@
     };
 
     cwLayoutReverseList.prototype.setOriginalSchema = function(){
-        cwApi.cwConfigs.ViewsSchemas[this.viewSchema.ViewName] = this.backupSchema;
+        var view = cwApi.getCurrentView().cwView;
+        cwApi.ViewSchemaManager.setSchema(view, this.backupSchema);
     };
 
     cwLayoutReverseList.prototype.drawAssociations = function(output, associationTitleText, object){
@@ -59,7 +60,7 @@
             cwApi.Log.Error('<last-reverse-node> option is not set');
             return;
         }
-        
+
         if (!cwApi.isUndefined(this.oldSchema)){
             // reverse data
             this.allObjectIdsByNodeId = {};
@@ -108,12 +109,10 @@
     cwLayoutReverseList.prototype.reverseData = function(object, currentNodeId){
         var i;
         if (this.oldSchema.hasOwnProperty(currentNodeId)){
-            if (object.associations.hasOwnProperty(currentNodeId)) {
-                for (i = 0; i < object.associations[currentNodeId].length; i+=1) {
-                    this.invertTree(object, object.associations[currentNodeId][i], currentNodeId);
-                }
-                delete object.associations[currentNodeId];
+            for (i = 0; i < object.associations[currentNodeId].length; i+=1) {
+                this.invertTree(object, object.associations[currentNodeId][i], currentNodeId);
             }
+            delete object.associations[currentNodeId];
             for( i = 0; i < this.oldSchema[currentNodeId].SortedChildren.length; i+=1){
                 this.reverseData(object, this.oldSchema[currentNodeId].SortedChildren[i].NodeId);
             }
