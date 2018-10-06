@@ -109,12 +109,14 @@
     cwLayoutReverseList.prototype.reverseData = function(object, currentNodeId){
         var i;
         if (this.oldSchema.hasOwnProperty(currentNodeId)){
-            for (i = 0; i < object.associations[currentNodeId].length; i+=1) {
-                this.invertTree(object, object.associations[currentNodeId][i], currentNodeId);
-            }
-            delete object.associations[currentNodeId];
-            for( i = 0; i < this.oldSchema[currentNodeId].SortedChildren.length; i+=1){
-                this.reverseData(object, this.oldSchema[currentNodeId].SortedChildren[i].NodeId);
+            if (object.associations.hasOwnProperty(currentNodeId)){    
+                for (i = 0; i < object.associations[currentNodeId].length; i+=1) {
+                    this.invertTree(object, object.associations[currentNodeId][i], currentNodeId);
+                }
+                delete object.associations[currentNodeId];
+                for( i = 0; i < this.oldSchema[currentNodeId].SortedChildren.length; i+=1){
+                    this.reverseData(object, this.oldSchema[currentNodeId].SortedChildren[i].NodeId);
+                }
             }
         }
     };
