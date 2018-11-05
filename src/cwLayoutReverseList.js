@@ -71,7 +71,6 @@
             if (!cwApi.isUndefined(cwApi.cwLayouts[nodeSchema.LayoutDrawOne].drawOne)) {
                 layout.drawOneMethod = cwApi.cwLayouts[nodeSchema.LayoutDrawOne].drawOne.bind(layout);
             }
-            this.sortChildren(object);
             output.push('<div class="reverse-node reverse-node-', this.nodeID, '">');
             layout.drawAssociations(output, null, object, null);
             output.push('</div>');
@@ -80,11 +79,13 @@
         }
     };
 
-    cwLayoutReverseList.prototype.sortChildren = function (object) {
-        if (object.associations.hasOwnProperty(this.stopNodeId)) {
-            object.associations[this.stopNodeId].sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        }
-    };
+    function sort(a, b){
+        if (a.name < b.name)
+            return -1;
+        if (a.name > b.name)
+            return 1;
+        return 0;
+    }
 
     cwLayoutReverseList.prototype.reverseSchema = function (viewSchema, childId, fatherId) {
         // recursive
@@ -119,6 +120,7 @@
             if (object.associations.hasOwnProperty(currentNodeId)) {
                 for (i = 0; i < object.associations[currentNodeId].length; i += 1) {
                     this.invertTree(object, object.associations[currentNodeId][i], currentNodeId);
+                    object.associations[currentNodeId].sort(sort);
                 }
                 delete object.associations[currentNodeId];
                 for (i = 0; i < this.oldSchema[currentNodeId].SortedChildren.length; i += 1) {
