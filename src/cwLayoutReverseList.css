@@ -1,7 +1,7 @@
-div.reverse-node .fa.cw-association-delete-item{
-	display: none;
+div.reverse-node .fa.cw-association-delete-item {
+  display: none !important;
 }
-	
-div.reverse-node a.cw-create-target-item, a.cw-associate-to-existing-item {
-	display: none !important;
+div.reverse-node a.cw-create-target-item,
+div.reverse-node a.cw-associate-to-existing-item {
+  display: none !important;
 }
