@@ -13,6 +13,11 @@ It will allow you to display that way :
 
 ![](https://github.com/nevakee716/ReverseList/raw/master/screen/image1b.png)
 
+## Notes  
+Due to the architecture of the core product, this layout may not work in some context such as (non limitative list) :  
+* popout
+* table
+
 ## Installation
 https://github.com/casewise/cpm/wiki
 
