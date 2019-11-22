@@ -150,30 +150,31 @@
       if (!data.associations.hasOwnProperty(childNodeId)) {
         data.associations[childNodeId] = [];
       }
+      if (o.associations[childNodeId]) {
+        for (j = 0; j < o.associations[childNodeId].length; j += 1) {
+          target = o.associations[childNodeId][j];
+          // check if items already exists and add it to root
+          if (!this.allObjectIdsByNodeId.hasOwnProperty(childNodeId)) {
+            // add item
+            this.allObjectIdsByNodeId[childNodeId] = [];
+            this.allObjectIdsByNodeId[childNodeId].push(target.object_id);
+            data.associations[childNodeId].push(target);
+          } else if (this.allObjectIdsByNodeId[childNodeId].indexOf(target.object_id) === -1) {
+            this.allObjectIdsByNodeId[childNodeId].push(target.object_id);
+            data.associations[childNodeId].push(target);
+          } else {
+            // already exists
+            target = data.associations[childNodeId].filter(findItemInArrayById, target)[0];
+          }
 
-      for (j = 0; j < o.associations[childNodeId].length; j += 1) {
-        target = o.associations[childNodeId][j];
-        // check if items already exists and add it to root
-        if (!this.allObjectIdsByNodeId.hasOwnProperty(childNodeId)) {
-          // add item
-          this.allObjectIdsByNodeId[childNodeId] = [];
-          this.allObjectIdsByNodeId[childNodeId].push(target.object_id);
-          data.associations[childNodeId].push(target);
-        } else if (this.allObjectIdsByNodeId[childNodeId].indexOf(target.object_id) === -1) {
-          this.allObjectIdsByNodeId[childNodeId].push(target.object_id);
-          data.associations[childNodeId].push(target);
-        } else {
-          // already exists
-          target = data.associations[childNodeId].filter(findItemInArrayById, target)[0];
+          // add o to child
+          if (!target.associations.hasOwnProperty(currentNodeId)) {
+            target.associations[currentNodeId] = [];
+          }
+          target.associations[currentNodeId].push(o);
         }
-
-        // add o to child
-        if (!target.associations.hasOwnProperty(currentNodeId)) {
-          target.associations[currentNodeId] = [];
-        }
-        target.associations[currentNodeId].push(o);
+        delete o.associations[childNodeId];
       }
-      delete o.associations[childNodeId];
     }
   };
 
